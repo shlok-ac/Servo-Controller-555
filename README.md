@@ -205,16 +205,25 @@ The PCB references the model using a project-relative path so that the model can
 
 ---
 
+## Working with the Project
 
-## Opening the Project
+This repository contains the complete KiCad project, including the schematic, PCB layout, project configuration, and supporting CAD assets.
 
-The project can be opened directly in KiCad using the project file:
+### Open in KiCad
 
-```text
-Servo Controller 555.kicad_pro
-```
+1. Clone or download this repository.
+2. Open the KiCad project file: `Servo Controller 555.kicad_pro`
+3. From the KiCad Project Manager, open the **Schematic Editor** or **PCB Editor** as required.
 
-The schematic, PCB layout, and associated project files are kept together so that the project can be cloned and opened as a complete KiCad project.
+The schematic, PCB layout, and project configuration files are kept together so that the project can be opened and edited as a complete KiCad project after cloning.
+
+### Project Files
+
+The main KiCad files are:
+
+- `Servo Controller 555.kicad_pro` — KiCad project configuration
+- `Servo Controller 555.kicad_sch` — schematic
+- `Servo Controller 555.kicad_pcb` — PCB layout
 
 ---
 
@@ -224,7 +233,6 @@ This project was completed while following the **PCB Design Zero-to-Hero** train
 
 The training material provided the learning framework for the project, while this repository contains my KiCad project files, PCB layout, documentation, verification results, and generated fabrication outputs.
 
-[PCB Design Zero-to-Hero — Training Modules](https://training.nuteams.org/pcb-design-zero-to-hero)
 
 ---
 
@@ -238,5 +246,4 @@ See [`LICENSE`](LICENSE) for the complete license text.
 
 ## Author
 
-**Shlok Chorge**
-[GitHub Profile](https://github.com/shlok-ac)
+**Shlok Chorge** **.** [GitHub Profile](https://github.com/shlok-ac)
