@@ -30,41 +30,40 @@ The underlying circuit uses a 555 timer to generate the control signal for a ser
 
 ## Repository Structure
 
-```text
+<pre>
 Servo-Controller-555/
 │
-├── .gitattributes
-├── .gitignore
-├── LICENSE
-├── README.md
+├── <a href=".gitattributes">.gitattributes</a>
+├── <a href=".gitignore">.gitignore</a>
+├── <a href="LICENSE">LICENSE</a>
+├── <a href="README.md">README.md</a>
 │
-├── Servo Controller 555.kicad_pcb
-├── Servo Controller 555.kicad_pro
-├── Servo Controller 555.kicad_sch
+├── <a href="Servo%20Controller%20555.kicad_pcb">Servo Controller 555.kicad_pcb</a>
+├── <a href="Servo%20Controller%20555.kicad_pro">Servo Controller 555.kicad_pro</a>
+├── <a href="Servo%20Controller%20555.kicad_sch">Servo Controller 555.kicad_sch</a>
 │
-├── assets/
-│   ├── pcb-3d-front.png
-│   ├── pcb-3d-back.png
-│   ├── schematic.png
-│   └── pcb-layout.png
+├── <a href="assets/">assets/</a>
+│   ├── <a href="assets/pcb-3d-front.png">pcb-3d-front.png</a>
+│   ├── <a href="assets/pcb-3d-back.png">pcb-3d-back.png</a>
+│   ├── <a href="assets/schematic.png">schematic.png</a>
+│   └── <a href="assets/pcb-layout.png">pcb-layout.png</a>
 │
-├── documentation/
-│   ├── schematic.pdf
-│   ├── pcb-layout.pdf
-│   └── verification/
-│       ├── ERC.rpt
-│       └── DRC.rpt
+├── <a href="documentation/">documentation/</a>
+│   ├── <a href="documentation/schematic.pdf">schematic.pdf</a>
+│   ├── <a href="documentation/pcb-layout.pdf">pcb-layout.pdf</a>
+│   └── <a href="documentation/verification/">verification/</a>
+│       ├── <a href="documentation/verification/ERC.rpt">ERC.rpt</a>
+│       └── <a href="documentation/verification/DRC.rpt">DRC.rpt</a>
 │
-├── fabrication/
-│   ├── gerbers/
-│   ├── drills/
-│   ├── BOM.csv
-│   └── position.csv
+├── <a href="fabrication/">fabrication/</a>
+│   ├── <a href="fabrication/gerbers/">gerbers/</a>
+│   ├── <a href="fabrication/drills/">drills/</a>
+│   ├── <a href="fabrication/BOM.csv">BOM.csv</a>
+│   └── <a href="fabrication/position.csv">position.csv</a>
 │
-└── external-cad/
-    └── Potentiometer_Bourns_PTV09A-1_Single_Vertical.step
-
-```
+└── <a href="external-cad/">external-cad/</a>
+    └── <a href="external-cad/Potentiometer_Bourns_PTV09A-1_Single_Vertical.step">Potentiometer_Bourns_PTV09A-1_Single_Vertical.step</a>
+</pre>
 
 ---
 
