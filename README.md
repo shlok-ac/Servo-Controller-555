@@ -156,7 +156,7 @@ The model is stored separately from the KiCad project files:
 
 ```text
 external-cad/
-└── component.stp
+└── Potentiometer_Bourns_PTV09A-1_Single_Vertical.step
 ```
 
 The PCB references the model using a project-relative path so that the model can be resolved when the repository is cloned to another system.
@@ -242,5 +242,4 @@ See [`LICENSE`](LICENSE) for the complete license text.
 ## Author
 
 **Shlok Chorge**
-
 [GitHub Profile](https://github.com/shlok-ac)
