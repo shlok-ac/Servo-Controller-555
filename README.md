@@ -28,6 +28,46 @@ The underlying circuit uses a 555 timer to generate the control signal for a ser
 
 ---
 
+## Repository Structure
+
+```text
+Servo-Controller-555/
+│
+├── .gitattributes
+├── .gitignore
+├── LICENSE
+├── README.md
+│
+├── Servo Controller 555.kicad_pcb
+├── Servo Controller 555.kicad_pro
+├── Servo Controller 555.kicad_sch
+│
+├── assets/
+│   ├── pcb-3d-front.png
+│   ├── pcb-3d-back.png
+│   ├── schematic.png
+│   └── pcb-layout.png
+│
+├── documentation/
+│   ├── schematic.pdf
+│   ├── pcb-layout.pdf
+│   └── verification/
+│       ├── ERC.rpt
+│       └── DRC.rpt
+│
+├── fabrication/
+│   ├── gerbers/
+│   ├── drills/
+│   ├── BOM.csv
+│   └── position.csv
+│
+└── external-cad/
+    └── Potentiometer_Bourns_PTV09A-1_Single_Vertical.step
+
+```
+
+---
+
 ## Features
 
 - 555 timer based servo controller
@@ -165,49 +205,6 @@ The PCB references the model using a project-relative path so that the model can
 
 ---
 
-## Repository Structure
-
-<details>
-<summary>View repository structure</summary>
-
-```text
-Servo-Controller-555/
-│
-├── assets/
-│   ├── pcb-3d-front.png
-│   ├── pcb-3d-back.png
-│   ├── schematic.png
-│   └── pcb-layout.png
-│
-├── documentation/
-│   ├── schematic.pdf
-│   ├── pcb-layout.pdf
-│   └── verification/
-│       ├── ERC.rpt
-│       └── DRC.rpt
-│
-├── external-cad/
-│   └── component.stp
-│
-├── fabrication/
-│   ├── gerbers/
-│   ├── drills/
-│   ├── BOM.csv
-│   └── position.csv
-│
-├── .gitattributes
-├── .gitignore
-├── LICENSE
-├── README.md
-│
-├── Servo Controller 555.kicad_pcb
-├── Servo Controller 555.kicad_pro
-└── Servo Controller 555.kicad_sch
-```
-
-</details>
-
----
 
 ## Opening the Project
 
