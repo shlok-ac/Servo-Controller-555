@@ -10,7 +10,7 @@ A 555 timer based servo controller designed in KiCad as part of my PCB design le
 
 ## Overview
 
-This project was created while working through the **PCB Design Zero-to-Hero** training modules by NU Teams.
+This project was created while working through the training modules by NU Teams.
 
 The main goal was to practice the complete PCB design process in KiCad, including:
 
