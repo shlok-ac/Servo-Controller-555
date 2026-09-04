@@ -12,8 +12,8 @@
 		(date "2026-08-16")
 		(rev "01")
 		(company "NU Teams")
-		(comment 1 "A Guided Project from Technical Module of ")
-		(comment 2 "Prepared by Shlok Chorge")
+		(comment 1 "Designed by: Shlok Chorge")
+		(comment 2 "555 Timer Servo Controller")
 	)
 	(layers
 		(0 "F.Cu" signal)

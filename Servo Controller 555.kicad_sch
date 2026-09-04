@@ -9,8 +9,8 @@
 		(date "2026-08-13")
 		(rev "1")
 		(company "NU Teams")
-		(comment 1 "A Guided Project from Technical Module of")
-		(comment 2 "Prepared by Shlok Chorge")
+		(comment 1 "Designed by: Shlok Chorge")
+		(comment 2 "555 Timer Servo Controller")
 	)
 	(lib_symbols
 		(symbol "Connector:Conn_01x03_Pin"
