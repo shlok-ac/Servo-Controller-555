@@ -101,15 +101,21 @@ The PCB was designed with emphasis on:
 
 [View PCB Layout PDF](documentation/pcb-layout.pdf)
 
-### 3D View
+### 3D Views
 
-#### Front
+<details>
+<summary>View Front 3D Model</summary>
 
 ![PCB 3D Front](assets/pcb-3d-front.png)
 
-#### Back
+</details>
+
+<details>
+<summary>View Back 3D Model</summary>
 
 ![PCB 3D Back](assets/pcb-3d-back.png)
+
+</details>
 
 ---
 
