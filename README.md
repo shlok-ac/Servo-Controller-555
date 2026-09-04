@@ -117,7 +117,6 @@ The PCB was designed with emphasis on:
 ## Circuit Overview
 
 The circuit is based around a 555 timer configured to generate a servo control signal.
-
 A potentiometer is used to vary the timing of the generated pulse, allowing the servo position to be adjusted.
 
 The schematic is included primarily to document the electrical design associated with the PCB.
@@ -238,7 +237,18 @@ The training material provided the learning framework for the project, while thi
 
 ## License
 
+Copyright © 2026 Shlok Chorge
+
 This project is licensed under the **CERN Open Hardware Licence Version 2 – Strongly Reciprocal (CERN-OHL-S-2.0)**.
+
+This license allows others to:
+
+- Use and study the hardware design
+- Modify and adapt the design
+- Manufacture hardware based on the design
+- Distribute the original or modified design
+
+Under the Strongly Reciprocal terms, modifications and derivative designs based on this project must be made available under the same license, along with the corresponding source design files.
 
 See [`LICENSE`](LICENSE) for the complete license text.
 
