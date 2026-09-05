@@ -290,7 +290,7 @@ See [External CAD Models](#external-cad-models) for the STEP model used by the P
 
 ## Learning Source
 
-This project was completed while working through the **PCB Design Zero-to-Hero** training modules by NU Teams.
+This project was completed while working through the PCB Design Zero-to-Hero training modules by **NU Teams**.
 
 The training material provided the learning framework for the project, while this repository contains my KiCad project files, PCB layout, documentation, verification results, and generated fabrication outputs.
 
