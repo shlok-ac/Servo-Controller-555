@@ -8,7 +8,7 @@ A 555 timer based servo controller designed in KiCad as part of my PCB design le
 
 [![License: CERN-OHL-S-2.0](https://img.shields.io/badge/License-CERN--OHL--S--2.0-blue.svg)](LICENSE)
 [![KiCad 10.0](https://img.shields.io/badge/KiCad-10.0-brightgreen.svg)](https://kicad.org)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717.svg)](https://github.com/shlok-ac/Servo-Controller-555)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717.svg)](https://github.com/shlok-ac/Servo-Controller-555)[![repo size](https://img.shields.io/github/repo-size/shlok-ac/Servo-Controller-555)](https://github.com/shlok-ac/Servo-Controller-555) [![issues](https://img.shields.io/github/issues/shlok-ac/Servo-Controller-555)](https://github.com/shlok-ac/Servo-Controller-555/issues)
 
 ## TL;DR
 
@@ -35,7 +35,7 @@ A 555 timer based servo controller designed in KiCad as part of my PCB design le
 
 ## Overview
 
-This project was created while working through the **PCB Design Zero-to-Hero** training modules by NU Teams.
+This project was created while working through the training modules by NU Teams.
 
 The main goal was to practice the complete PCB design process in KiCad, including:
 
@@ -126,6 +126,17 @@ The PCB was designed with emphasis on:
 
 [View PCB Layout PDF](documentation/pcb-layout.pdf)
 
+### Footprints & Libraries
+
+The project uses KiCad libraries and project-defined footprints for the components used on the PCB.
+
+- Standard KiCad footprints are used where applicable.
+- Custom footprints are included as part of the project where required.
+- The PCB project contains the footprint assignments used by the design.
+- The external 3D model used by the potentiometer footprint is documented separately in [External CAD Models](#external-cad-models).
+
+If the project is edited or reused, footprint assignments should be checked in the schematic and PCB files before making design changes.
+
 ### 3D Views
 
 <details>
@@ -158,18 +169,6 @@ The schematic is included primarily to document the electrical design associated
 
 [View Schematic PDF](documentation/schematic.pdf)
 
----
-
-## Footprints & Libraries
-
-The project uses KiCad libraries and project-defined footprints for the components used on the PCB.
-
-- Standard KiCad footprints are used where applicable.
-- Custom footprints are included as part of the project where required.
-- The PCB project contains the footprint assignments used by the design.
-- The external 3D model used by the potentiometer footprint is documented separately in [External CAD Models](#external-cad-models).
-
-If the project is edited or reused, footprint assignments should be checked in the schematic and PCB files before making design changes.
 
 ---
 
