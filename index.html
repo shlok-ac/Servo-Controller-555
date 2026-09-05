@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="555 Servo Controller — KiCad PCB design project by Shlok Chorge.">
+  <title>555 Servo Controller | Shlok Chorge</title>
+
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --surface: #fffdf8;
+      --surface-2: #f0ebe0;
+      --ink: #18212b;
+      --muted: #66717d;
+      --navy: #172a3a;
+      --red: #9d3038;
+      --green: #456b58;
+      --line: #d9d1c3;
+      --shadow: 0 18px 45px rgba(38, 31, 21, 0.08);
+      --radius: 18px;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(157, 48, 56, 0.07), transparent 28rem),
+        radial-gradient(circle at 90% 10%, rgba(69, 107, 88, 0.07), transparent 28rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover { color: var(--red); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 241, 232, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(217, 209, 195, 0.8);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 15px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-family: var(--mono);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand span { color: var(--red); }
+
+    .navlinks {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .navlinks a:hover { color: var(--ink); }
+
+    .wrap {
+      max-width: 1180px;
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    .hero {
+      min-height: 720px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 60px;
+      padding: 76px 0 90px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.7);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      max-width: 720px;
+      font-size: clamp(3.2rem, 7vw, 6.6rem);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+    }
+
+    h1 em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .hero p {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      margin: 0 0 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--navy);
+      background: var(--navy);
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .button:hover {
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(23, 42, 58, 0.16);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--navy);
+      border-color: var(--line);
+    }
+
+    .button.secondary:hover { color: var(--red); }
+
+    .hero-card {
+      position: relative;
+      padding: 13px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      transform: rotate(1deg);
+    }
+
+    .hero-card img {
+      display: block;
+      width: 100%;
+      border-radius: 14px;
+    }
+
+    .hero-card::after {
+      content: "KiCad • PCB Design";
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      padding: 7px 10px;
+      border-radius: 7px;
+      background: rgba(23, 42, 58, 0.9);
+      color: white;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    section {
+      padding: 82px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.65fr 1.35fr;
+      gap: 40px;
+      margin-bottom: 38px;
+    }
+
+    .section-number {
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin: 8px 0 0;
+      max-width: 720px;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 22px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 8px 28px rgba(38, 31, 21, 0.035);
+    }
+
+    .panel p { color: var(--muted); }
+
+    .facts {
+      display: grid;
+      gap: 10px;
+    }
+
+    .fact {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact:last-child { border-bottom: 0; }
+
+    .fact small {
+      display: block;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .fact strong { display: block; margin-top: 3px; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 21px;
+    }
+
+    .feature .icon {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .feature h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    figure {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+      border-radius: 11px;
+      background: var(--surface-2);
+    }
+
+    figcaption {
+      padding: 12px 9px 7px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .verification {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .check {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .check-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .check h3 { margin: 0; }
+
+    .pass {
+      border: 1px solid rgba(69, 107, 88, .25);
+      background: rgba(69, 107, 88, .08);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-family: var(--mono);
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    .metric {
+      font-size: 2.6rem;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: -.05em;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .check a {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--red);
+      font-weight: 700;
+      font-size: .88rem;
+    }
+
+    .tree-wrap {
+      background: #18212b;
+      color: #edf1f3;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .tree-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 17px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: #aeb8c0;
+    }
+
+    .tree-actions button {
+      border: 1px solid rgba(255,255,255,.15);
+      background: transparent;
+      color: #d9e0e4;
+      padding: 5px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .72rem;
+    }
+
+    .tree {
+      padding: 18px 22px 24px;
+      font-family: var(--mono);
+      font-size: .88rem;
+      line-height: 1.85;
+    }
+
+    .tree ul {
+      list-style: none;
+      margin: 0;
+      padding-left: 23px;
+    }
+
+    .tree > ul { padding-left: 0; }
+
+    .tree li {
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .tree .folder {
+      cursor: pointer;
+      user-select: none;
+      color: #f1d69b;
+    }
+
+    .tree .folder::before {
+      content: "▾";
+      display: inline-block;
+      width: 18px;
+      color: #8996a0;
+    }
+
+    .tree .folder.closed::before { content: "▸"; }
+
+    .tree .folder.closed + ul { display: none; }
+
+    .tree a { color: #dce4e8; }
+    .tree a:hover { color: #f0b6b9; }
+    .tree .folder-icon { margin-right: 5px; }
+
+    .files {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .file-card {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 17px;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .file-card:hover {
+      transform: translateY(-2px);
+      border-color: #b8aa94;
+    }
+
+    .file-card strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: .78rem;
+    }
+
+    .file-card span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 17px 19px;
+      border-left: 3px solid var(--red);
+      background: rgba(157, 48, 56, .055);
+      color: var(--muted);
+      border-radius: 0 10px 10px 0;
+    }
+
+    .learning {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .learning-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      background: var(--navy);
+      color: white;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 1.3rem;
+      text-align: center;
+      padding: 30px;
+    }
+
+    footer {
+      padding: 35px 0 50px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    footer .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    footer a { color: var(--red); font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .hero,
+      .overview,
+      .learning,
+      .section-head { grid-template-columns: 1fr; }
+
+      .hero { min-height: auto; padding-top: 55px; }
+
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .files { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .navlinks { display: none; }
+      .wrap { padding: 0 17px; }
+      .hero { padding: 45px 0 65px; }
+      section { padding: 62px 0; }
+      .feature-grid,
+      .visual,
+      .verification,
+      .files { grid-template-columns: 1fr; }
+
+      .panel, .check { padding: 22px; }
+
+      .tree {
+        overflow-x: auto;
+        font-size: .78rem;
+      }
+
+      footer .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="#top">555<span>/</span>SERVO</a>
+      <div class="navlinks">
+        <a href="#project">Project</a>
+        <a href="#pcb">PCB</a>
+        <a href="#verification">Verification</a>
+        <a href="#files">Files</a>
+        <a href="#about">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <section class="hero" style="border-top:0;">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> PCB Design · KiCad 10.0</div>
+          <h1>555 Servo<br><em>Controller</em></h1>
+          <p>
+            A compact 555 timer based servo controller designed in KiCad.
+            This project documents the complete PCB design workflow, from schematic
+            and footprint selection through layout, verification, 3D visualization,
+            and fabrication outputs.
+          </p>
+          <div class="buttons">
+            <a class="button" href="https://github.com/shlok-ac/Servo-Controller-555">View on GitHub ↗</a>
+            <a class="button secondary" href="#pcb">Explore the PCB ↓</a>
+          </div>
+        </div>
+
+        <a class="hero-card" href="assets/pcb-3d-front.png">
+          <img src="assets/pcb-3d-front.png" alt="Front 3D render of the 555 Servo Controller PCB">
+        </a>
+      </section>
+
+      <section id="project">
+        <div class="section-head">
+          <div class="section-number">01 / PROJECT</div>
+          <div>
+            <h2>Built to learn the full PCB workflow.</h2>
+            <p class="lead">
+              The project was completed while working through the PCB Design Zero-to-Hero
+              training modules by NU Teams. The training provided the learning framework;
+              this repository contains the resulting KiCad project and documentation.
+            </p>
+          </div>
+        </div>
+
+        <div class="overview">
+          <div class="panel">
+            <p>
+              The underlying circuit uses a 555 timer to generate the servo control signal.
+              A potentiometer is used to adjust the generated pulse, allowing the servo
+              position to be varied. The circuit is intentionally kept simple because the
+              primary focus here is the PCB design and documentation workflow.
+            </p>
+            <p>
+              The board design includes component placement, routing, board outline,
+              mounting considerations, silkscreen labeling, 3D visualization, and
+              generated fabrication and assembly files.
+            </p>
+          </div>
+
+          <div class="panel facts">
+            <div class="fact">
+              <small>CAD Tool</small>
+              <strong>KiCad 10.0</strong>
+            </div>
+            <div class="fact">
+              <small>Design Type</small>
+              <strong>PCB / Open Hardware</strong>
+            </div>
+            <div class="fact">
+              <small>Verification</small>
+              <strong>ERC + DRC</strong>
+            </div>
+            <div class="fact">
+              <small>Physical Status</small>
+              <strong>Not manufactured or tested</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pcb">
+        <div class="section-head">
+          <div class="section-number">02 / PCB DESIGN</div>
+          <div>
+            <h2>From schematic to board.</h2>
+            <p class="lead">
+              The PCB was designed with emphasis on placement, routing, accessibility,
+              mechanical clearances, board outline, and clear silkscreen labeling.
+            </p>
+          </div>
+        </div>
+
+        <div class="visual">
+          <figure>
+            <img src="assets/pcb-layout.png" alt="PCB layout view">
+            <figcaption>PCB layout and routing</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/schematic.png" alt="555 servo controller schematic">
+            <figcaption>Associated circuit schematic</figcaption>
+          </figure>
+        </div>
+
+        <div class="feature-grid" style="margin-top:18px;">
+          <div class="feature">
+            <div class="icon">⌘</div>
+            <h3>Component Placement</h3>
+            <p>Components arranged with attention to access, routing, and board organization.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">⌁</div>
+            <h3>Routing</h3>
+            <p>PCB traces organized around the circuit and physical constraints of the board.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">▣</div>
+            <h3>3D Visualization</h3>
+            <p>KiCad 3D views used to inspect the assembled-board representation.</p>
+          </div>
+        </div>
+
+        <div class="buttons" style="margin-top:20px;">
+          <a class="button secondary" href="documentation/pcb-layout.pdf">PCB Layout PDF ↗</a>
+          <a class="button secondary" href="documentation/schematic.pdf">Schematic PDF ↗</a>
+          <a class="button secondary" href="assets/pcb-3d-back.png">Back 3D View ↗</a>
+        </div>
+      </section>
+
+      <section id="verification">
+        <div class="section-head">
+          <div class="section-number">03 / VERIFICATION</div>
+          <div>
+            <h2>Clean CAD checks.</h2>
+            <p class="lead">
+              ERC and DRC were run in KiCad. These checks provide design-level verification;
+              they do not replace physical testing of a manufactured PCB.
+            </p>
+          </div>
+        </div>
+
+        <div class="verification">
+          <div class="check">
+            <div class="check-top">
+              <h3>Electrical Rules Check</h3>
+              <span class="pass">PASS</span>
+            </div>
+            <div class="metric">0</div>
+            <div class="metric-label">errors · 0 warnings</div>
+            <a href="documentation/verification/ERC.rpt">View ERC report ↗</a>
+          </div>
+
+          <div class="check">
+            <div class="check-top">
+              <h3>Design Rules Check</h3>
+              <span class="pass">PASS</span>
+            </div>
+            <div class="metric">0</div>
+            <div class="metric-label">violations · 0 unconnected pads</div>
+            <a href="documentation/verification/DRC.rpt">View DRC report ↗</a>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Project status:</strong> the PCB has not been physically manufactured,
+          assembled, or bench-tested. Physical validation remains future work.
+        </div>
+      </section>
+
+      <section id="files">
+        <div class="section-head">
+          <div class="section-number">04 / PROJECT FILES</div>
+          <div>
+            <h2>Everything needed to inspect the design.</h2>
+            <p class="lead">
+              The repository keeps the editable KiCad source files together with
+              documentation and generated fabrication outputs.
+            </p>
+          </div>
+        </div>
+
+        <div class="tree-wrap">
+          <div class="tree-toolbar">
+            <span>repository / Servo-Controller-555</span>
+            <div class="tree-actions">
+              <button onclick="setFolders(true)">Expand all</button>
+              <button onclick="setFolders(false)">Collapse all</button>
+            </div>
+          </div>
+
+          <div class="tree">
+            <ul>
+              <li><span class="folder"><span class="folder-icon">📁</span>assets/</span>
+                <ul>
+                  <li><a href="assets/pcb-3d-front.png">├── pcb-3d-front.png</a></li>
+                  <li><a href="assets/pcb-3d-back.png">├── pcb-3d-back.png</a></li>
+                  <li><a href="assets/schematic.png">├── schematic.png</a></li>
+                  <li><a href="assets/pcb-layout.png">└── pcb-layout.png</a></li>
+                </ul>
+              </li>
+
+              <li><span class="folder"><span class="folder-icon">📁</span>documentation/</span>
+                <ul>
+                  <li><a href="documentation/schematic.pdf">├── schematic.pdf</a></li>
+                  <li><a href="documentation/pcb-layout.pdf">├── pcb-layout.pdf</a></li>
+                  <li><span class="folder"><span class="folder-icon">📁</span>verification/</span>
+                    <ul>
+                      <li><a href="documentation/verification/ERC.rpt">├── ERC.rpt</a></li>
+                      <li><a href="documentation/verification/DRC.rpt">└── DRC.rpt</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <li><span class="folder"><span class="folder-icon">📁</span>fabrication/</span>
+                <ul>
+                  <li><span class="folder"><span class="folder-icon">📁</span>gerbers/</span>
+                    <ul>
+                      <li><a href="fabrication/gerbers/">└── Gerber output files</a></li>
+                    </ul>
+                  </li>
+                  <li><span class="folder"><span class="folder-icon">📁</span>drills/</span>
+                    <ul>
+                      <li><a href="fabrication/drills/">└── Drill output files</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="fabrication/BOM.csv">├── BOM.csv</a></li>
+                  <li><a href="fabrication/position.csv">└── position.csv</a></li>
+                </ul>
+              </li>
+
+              <li><span class="folder"><span class="folder-icon">📁</span>external-cad/</span>
+                <ul>
+                  <li><a href="external-cad/Potentiometer_Bourns_PTV09A-1_Single_Vertical.step">└── Potentiometer_Bourns_PTV09A-1_Single_Vertical.step</a></li>
+                </ul>
+              </li>
+
+              <li><a href="Servo%20Controller%20555.kicad_pro">Servo Controller 555.kicad_pro</a></li>
+              <li><a href="Servo%20Controller%20555.kicad_sch">Servo Controller 555.kicad_sch</a></li>
+              <li><a href="Servo%20Controller%20555.kicad_pcb">Servo Controller 555.kicad_pcb</a></li>
+              <li><a href="LICENSE">LICENSE</a></li>
+              <li><a href="README.md">README.md</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="files" style="margin-top:20px;">
+          <a class="file-card" href="fabrication/gerbers/">
+            <strong>Gerbers</strong>
+            <span>PCB manufacturing output</span>
+          </a>
+          <a class="file-card" href="fabrication/drills/">
+            <strong>Drills</strong>
+            <span>PCB drill data</span>
+          </a>
+          <a class="file-card" href="fabrication/BOM.csv">
+            <strong>BOM.csv</strong>
+            <span>Bill of Materials</span>
+          </a>
+          <a class="file-card" href="fabrication/position.csv">
+            <strong>position.csv</strong>
+            <span>Pick-and-place data</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="cad">
+        <div class="section-head">
+          <div class="section-number">05 / CAD ASSET</div>
+          <div>
+            <h2>External CAD, kept separate.</h2>
+            <p class="lead">
+              A STEP model is included for component visualization in KiCad's 3D Viewer.
+              It is kept in a separate <code>external-cad/</code> directory rather than
+              being mixed with the KiCad source files.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p style="margin-top:0;">
+            <strong>Model:</strong>
+            <a href="external-cad/Potentiometer_Bourns_PTV09A-1_Single_Vertical.step">
+              Potentiometer_Bourns_PTV09A-1_Single_Vertical.step
+            </a>
+          </p>
+          <p>
+            The PCB references the model using a project-relative path, so the reference
+            should remain valid when the repository is cloned to another system.
+          </p>
+          <div class="note">
+            Redistribution rights for externally sourced CAD models depend on their
+            original license or source. The external model is therefore treated
+            separately from the project's own hardware design files.
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-head">
+          <div class="section-number">06 / WORKING WITH IT</div>
+          <div>
+            <h2>Clone. Open. Inspect.</h2>
+            <p class="lead">
+              The complete KiCad project is kept together so it can be opened and edited
+              after cloning.
+            </p>
+          </div>
+        </div>
+
+        <div class="overview">
+          <div class="panel">
+            <h3>Requirements</h3>
+            <p>KiCad 10.0 or a compatible version capable of opening the project files.</p>
+
+            <h3 style="margin-top:24px;">Clone the repository</h3>
+            <pre style="overflow:auto; background:var(--navy); color:#edf1f3; padding:16px; border-radius:10px;">git clone https://github.com/shlok-ac/Servo-Controller-555.git
+cd Servo-Controller-555</pre>
+
+            <a class="button secondary" href="https://github.com/shlok-ac/Servo-Controller-555">
+              Open GitHub Repository ↗
+            </a>
+          </div>
+
+          <div class="panel">
+            <h3>Open in KiCad</h3>
+            <ol style="color:var(--muted); padding-left:20px;">
+              <li>Clone or download the repository.</li>
+              <li>Open <code>Servo Controller 555.kicad_pro</code>.</li>
+              <li>Use the KiCad Project Manager to open the Schematic Editor or PCB Editor.</li>
+            </ol>
+            <p>
+              The main project files are the <code>.kicad_pro</code>, <code>.kicad_sch</code>,
+              and <code>.kicad_pcb</code> files at the repository root.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="section-number">07 / LEARNING SOURCE</div>
+          <div>
+            <h2>Where the workflow came from.</h2>
+            <p class="lead">
+              This project was completed while working through the <strong>PCB Design
+              Zero-to-Hero</strong> training modules by NU Teams.
+            </p>
+          </div>
+        </div>
+
+        <div class="learning">
+          <div class="learning-mark">PCB DESIGN<br>ZERO → HERO</div>
+          <div class="panel">
+            <p>
+              The training material provided the learning framework for the project.
+              This repository contains the resulting KiCad project files, PCB layout,
+              documentation, verification results, and generated fabrication outputs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="section-number">08 / LICENSE</div>
+          <div>
+            <h2>Open hardware, strongly reciprocal.</h2>
+            <p class="lead">
+              Released under the CERN Open Hardware Licence Version 2 –
+              Strongly Reciprocal.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p style="margin-top:0;"><strong>CERN-OHL-S-2.0</strong></p>
+          <p>
+            The license allows others to use and study the hardware design, modify and
+            adapt it, manufacture hardware based on it, and distribute the original or
+            modified design. Under the Strongly Reciprocal terms, modifications and
+            derivative designs must be made available under the same license along
+            with the corresponding source design files.
+          </p>
+          <a class="button secondary" href="LICENSE">Read the full LICENSE ↗</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div>© 2026 Shlok Chorge · 555 Servo Controller</div>
+      <div>
+        <a href="https://github.com/shlok-ac">GitHub Profile ↗</a>
+        &nbsp;·&nbsp;
+        <a href="https://github.com/shlok-ac/Servo-Controller-555">Repository ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll(".tree .folder").forEach(folder => {
+      folder.addEventListener("click", () => {
+        folder.classList.toggle("closed");
+      });
+    });
+
+    function setFolders(expand) {
+      document.querySelectorAll(".tree .folder").forEach(folder => {
+        folder.classList.toggle("closed", !expand);
+      });
+    }
+  </script>
+</body>
+</html>
