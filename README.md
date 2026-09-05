@@ -1,264 +1,179 @@
 # 555 Servo Controller
 
-![PCB 3D Front](assets/pcb-3d-front.png)
+A compact KiCad PCB design that generates servo control pulses using a 555 timer; includes schematic, PCB layout, 3D views, ERC/DRC reports, BOM, and fabrication files.
 
-A 555 timer based servo controller designed in KiCad as part of my PCB design learning journey. This project focuses primarily on the complete PCB design workflow, from schematic and footprint selection to PCB layout, 3D visualization, design-rule verification, and preparation of fabrication files.
+> Project status: PCB design completed — not yet manufactured or physically tested.
 
-> **Project status:** PCB design completed. The board has not been physically manufactured or tested.
+[![License: CERN-OHL-S-2.0](https://img.shields.io/badge/License-CERN--OHL--S--2.0-blue.svg)](LICENSE) [![KiCad version](https://img.shields.io/badge/KiCad-10.0-brightgreen.svg)](https://kicad.org) [![repo size](https://img.shields.io/github/repo-size/shlok-ac/Servo-Controller-555)](https://github.com/shlok-ac/Servo-Controller-555) [![issues](https://img.shields.io/github/issues/shlok-ac/Servo-Controller-555)](https://github.com/shlok-ac/Servo-Controller-555/issues)
 
----
+## TL;DR
+- Designed in KiCad 10.0; 555-timer generates servo PWM controlled via potentiometer.
+- Repo includes KiCad project, 3D model, gerbers, BOM, ERC/DRC reports.
+- Design has passed KiCad ERC/DRC but has not been manufactured or bench-tested.
 
-## Overview
+## Table of contents
+- [Quick links](#quick-links)
+- [Quick start](#quick-start)
+- [Open in KiCad](#open-in-kicad)
+- [Files included](#files-included)
+- [Features](#features)
+- [PCB & Circuit overview](#pcb--circuit-overview)
+- [Design verification](#design-verification)
+- [Fabrication & manufacturing notes](#fabrication--manufacturing-notes)
+- [BOM & sourcing](#bom--sourcing)
+- [How to test / Validation plan](#how-to-test--validation-plan)
+- [Important notes](#important-notes)
+- [Contributing](#contributing)
+- [Changelog](#changelog)
+- [License](#license)
+- [Author](#author)
 
-This project was created while working through the training modules by NU Teams.
+## Quick links
+- Schematic PDF — documentation/schematic.pdf
+- PCB layout PDF — documentation/pcb-layout.pdf
+- 3D front — assets/pcb-3d-front.png
+- 3D back — assets/pcb-3d-back.png
+- Gerbers — fabrication/gerbers/
+- Drill files — fabrication/drills/
+- BOM — fabrication/BOM.csv
+- Position (Pick-and-Place) — fabrication/position.csv
+- ERC report — documentation/verification/ERC.rpt
+- DRC report — documentation/verification/DRC.rpt
 
-The main goal was to practice the complete PCB design process in KiCad, including:
+## Quick start
+If you just want to inspect or share the design quickly:
+1. Browse the PDFs in `documentation/` (schematic & PCB layout).
+2. Preview 3D renders in `assets/` or open KiCad's 3D viewer for the full model.
+3. Review `fabrication/BOM.csv` and `fabrication/position.csv` to prepare for ordering.
+4. Inspect gerbers in `fabrication/gerbers/` with your preferred Gerber viewer and confirm vendor settings.
 
-- Creating and working with a schematic
-- Selecting and assigning footprints
-- Designing the PCB layout
-- Component placement and routing
-- PCB mechanical considerations
-- 3D visualization of the board
-- Generating fabrication and assembly files
-- Running ERC and DRC checks
-- Organizing a complete KiCad project for sharing and reuse
+## Open in KiCad
+(Recommended KiCad version: 10.0)
+1. Clone or download the repository:
+   git clone https://github.com/shlok-ac/Servo-Controller-555.git
+2. Open KiCad, then open the project file:
+   - `Servo Controller 555.kicad_pro`
+3. From the KiCad Project Manager you can open:
+   - Schematic Editor (view/edit schematic)
+   - PCB Editor (view/edit layout and 3D with STEP models)
+4. If 3D models are missing, point footprint 3D model paths to the `external-cad/` folder in footprint properties.
 
-The underlying circuit uses a 555 timer to generate the control signal for a servo. The circuit itself is kept relatively simple here, as the primary focus of this repository is the **PCB design and documentation workflow**.
-
----
-
-## Repository Structure
-
-<pre>
-Servo-Controller-555/
-│
-├── <a href=".gitattributes">.gitattributes</a>
-├── <a href=".gitignore">.gitignore</a>
-├── <a href="LICENSE">LICENSE</a>
-├── <a href="README.md">README.md</a>
-│
-├── <a href="Servo%20Controller%20555.kicad_pcb">Servo Controller 555.kicad_pcb</a>
-├── <a href="Servo%20Controller%20555.kicad_pro">Servo Controller 555.kicad_pro</a>
-├── <a href="Servo%20Controller%20555.kicad_sch">Servo Controller 555.kicad_sch</a>
-│
-├── <a href="assets/">assets/</a>
-│   ├── <a href="assets/pcb-3d-front.png">pcb-3d-front.png</a>
-│   ├── <a href="assets/pcb-3d-back.png">pcb-3d-back.png</a>
-│   ├── <a href="assets/schematic.png">schematic.png</a>
-│   └── <a href="assets/pcb-layout.png">pcb-layout.png</a>
-│
-├── <a href="documentation/">documentation/</a>
-│   ├── <a href="documentation/schematic.pdf">schematic.pdf</a>
-│   ├── <a href="documentation/pcb-layout.pdf">pcb-layout.pdf</a>
-│   └── <a href="documentation/verification/">verification/</a>
-│       ├── <a href="documentation/verification/ERC.rpt">ERC.rpt</a>
-│       └── <a href="documentation/verification/DRC.rpt">DRC.rpt</a>
-│
-├── <a href="fabrication/">fabrication/</a>
-│   ├── <a href="fabrication/gerbers/">gerbers/</a>
-│   ├── <a href="fabrication/drills/">drills/</a>
-│   ├── <a href="fabrication/BOM.csv">BOM.csv</a>
-│   └── <a href="fabrication/position.csv">position.csv</a>
-│
-└── <a href="external-cad/">external-cad/</a>
-    └── <a href="external-cad/Potentiometer_Bourns_PTV09A-1_Single_Vertical.step">Potentiometer_Bourns_PTV09A-1_Single_Vertical.step</a>
-</pre>
-
----
-
-## Features
-
-- 555 timer based servo controller
-- Custom PCB layout designed in KiCad
-- Through-hole and SMD components
-- Adjustable servo control using a potentiometer
-- Custom component footprints
-- 3D PCB visualization
-- External STEP model for component visualization
-- ERC and DRC verification
-- Fabrication-ready Gerber and drill files
-- Bill of Materials (BOM)
-- Component position / Pick-and-Place file
-
----
-
-## PCB Design
-
-The PCB was designed with emphasis on:
-
-- Component placement
-- Routing and trace organization
-- Connector accessibility
-- Mounting-hole placement
-- Board outline and mechanical clearances
-- Clear silkscreen labeling
-- 3D representation of the completed PCB design
-
-### PCB Layout
-
-![PCB Layout](assets/pcb-layout.png)
-
-[View PCB Layout PDF](documentation/pcb-layout.pdf)
-
-### 3D Views
-
+## Files included
 <details>
-<summary>View Front 3D Model</summary>
-
-![PCB 3D Front](assets/pcb-3d-front.png)
-
-</details>
-
-<details>
-<summary>View Back 3D Model</summary>
-
-![PCB 3D Back](assets/pcb-3d-back.png)
-
-</details>
-
----
-
-## Circuit Overview
-
-The circuit is based around a 555 timer configured to generate a servo control signal.
-A potentiometer is used to vary the timing of the generated pulse, allowing the servo position to be adjusted.
-
-The schematic is included primarily to document the electrical design associated with the PCB.
-
-### Schematic
-
-![Schematic](assets/schematic.png)
-
-[View Schematic PDF](documentation/schematic.pdf)
-
----
-
-## Design Verification
-
-The design was checked using KiCad's Electrical Rules Checker (ERC) and Design Rules Checker (DRC).
-
-### ERC
-
-- Errors: **0**
-- Warnings: **0**
-
-[View ERC Report](documentation/verification/ERC.rpt)
-
-### DRC
-
-- Violations: **0**
-- Unconnected pads: **0**
-- Footprint errors: **0**
-
-[View DRC Report](documentation/verification/DRC.rpt)
-
-> These checks verify the design according to the configured KiCad rules. They do not replace physical testing of a manufactured PCB.
-
----
-
-## Fabrication Files
-
-Although this PCB has **not been physically manufactured**, the repository contains the files generated during the design process for potential future fabrication and assembly.
-
-<details>
-<summary>Available fabrication files</summary>
-
-### Gerbers
-
-PCB manufacturing files generated from the PCB layout.
-
-[Open Gerber files](fabrication/gerbers/)
-
-### Drill Files
-
-Drill data generated for the PCB.
-
-[Open drill files](fabrication/drills/)
-
-### Bill of Materials
-
-Component list generated from the KiCad project.
-
-[View BOM](fabrication/BOM.csv)
-
-### Position File
-
-Component placement information generated from the PCB design.
-
-[View Position File](fabrication/position.csv)
-
-</details>
-
----
-
-## External CAD Models
-
-The PCB uses an external STEP model for component visualization in KiCad's 3D Viewer.
-
-The model is stored separately from the KiCad project files:
+<summary>Repository structure</summary>
 
 ```text
-external-cad/
-└── Potentiometer_Bourns_PTV09A-1_Single_Vertical.step
+Servo-Controller-555/
+│
+├── .gitattributes
+├── .gitignore
+├── LICENSE
+├── README.md
+├── Servo Controller 555.kicad_pcb
+├── Servo Controller 555.kicad_pro
+├── Servo Controller 555.kicad_sch
+├── assets/
+│   ├── pcb-3d-front.png
+│   ├── pcb-3d-back.png
+│   ├── schematic.png
+│   └── pcb-layout.png
+├── documentation/
+│   ├── schematic.pdf
+│   ├── pcb-layout.pdf
+│   └── verification/
+│       ├── ERC.rpt
+│       └── DRC.rpt
+├── fabrication/
+│   ├── gerbers/
+│   ├── drills/
+│   ├── BOM.csv
+│   └── position.csv
+└── external-cad/
+    └── Potentiometer_Bourns_PTV09A-1_Single_Vertical.step
 ```
 
-The PCB references the model using a project-relative path so that the model can be resolved when the repository is cloned to another system.
+</details>
 
-> The redistribution rights of externally sourced CAD models depend on their original license/source. The external model is therefore treated separately from the project's own hardware design files.
+## Features
+- 555 timer based servo controller
+- Adjustable servo control using a potentiometer
+- Through-hole and SMD components
+- Custom footprints and external STEP model for 3D viewer
+- ERC and DRC verification reports
+- Fabrication files, BOM, and pick-and-place
 
----
+## PCB & Circuit overview
+The circuit uses a 555 timer to generate servo PWM; a potentiometer changes the pulse width to vary servo position. See `assets/schematic.png` or `documentation/schematic.pdf` for details.
 
-## Working with the Project
+![pcb-3d-front](assets/pcb-3d-front.png "Front 3D view of the PCB")
 
-This repository contains the complete KiCad project, including the schematic, PCB layout, project configuration, and supporting CAD assets.
+### Footprints & libraries
+- Footprints use the standard KiCad 10.0 libraries where possible.
+- Custom footprints and any third-party footprints are included in the KiCad project files or documented in the BOM/footprint fields. If you depend on external library packages, note them in this README or add a `CONTRIBUTING.md` with exact library versions.
 
-### Open in KiCad
+## Design verification
+- ERC: Errors 0, Warnings 0 — documentation/verification/ERC.rpt
+- DRC: Violations 0 — documentation/verification/DRC.rpt
 
-1. Clone or download this repository.
-2. Open the KiCad project file: `Servo Controller 555.kicad_pro`
-3. From the KiCad Project Manager, open the **Schematic Editor** or **PCB Editor** as required.
+> Note: KiCad checks validate the CAD rules; they are not a replacement for physical testing after fabrication.
 
-The schematic, PCB layout, and project configuration files are kept together so that the project can be opened and edited as a complete KiCad project after cloning.
+## Fabrication & manufacturing notes
+- Recommended: 2-layer FR-4, 1.6 mm, 1 oz copper.
+- Typical fab settings: 6/6 mil track/space (confirm with your board house).
+- Soldermask and silkscreen enabled.
+- Recommended finish: HASL or ENIG (confirm with your assembler/soldering needs).
+- Verify gerbers in a viewer (e.g., Gerbv or KiCad's Gerber viewer) and check with your manufacturer for edge clearance and drill tolerances.
+- For tighter tolerances, consult your fab's capabilities and adjust design rules before ordering.
 
-### Project Files
+## BOM & sourcing
+- See `fabrication/BOM.csv` for references, values, and footprints.
+- BOM column notes (recommended):
+  - Reference (designator)
+  - Value/Description
+  - Footprint
+  - Quantity
+  - Suggested part number / Supplier (add Digi-Key / Mouser PN if available)
+  - Notes (e.g., alternate parts, tolerance)
 
-The main KiCad files are:
+Consider updating BOM with supplier part numbers to make ordering reproducible.
 
-- `Servo Controller 555.kicad_pro` — KiCad project configuration
-- `Servo Controller 555.kicad_sch` — schematic
-- `Servo Controller 555.kicad_pcb` — PCB layout
+## How to test / Validation plan
+These are the planned checks to validate a manufactured board. Perform these after you have a physical PCB and components:
 
----
+1. Visual inspection
+   - Check silkscreen, component orientation, missing or misaligned parts, soldermask issues.
+2. Power smoke test
+   - Assemble power section only (no microcontrollers/servos) and apply regulated supply. Verify no excessive current draw or overheating.
+3. Basic signal check
+   - Probe the 555 output with an oscilloscope or logic probe. Verify pulse width range and frequency when adjusting the potentiometer.
+   - Confirm pulse amplitude is 0–Vcc as expected and duty cycle falls within servo PWM range.
+4. Servo functional test
+   - Connect a standard hobby servo to the output and confirm it moves across expected range when potentiometer is adjusted.
+   - Measure current drawn by the servo under no-load and typical-load conditions; ensure power traces and regulators (if any) are adequate.
+5. Full system test
+   - Test connectors, mechanical fit, mounting holes, and any connectors intended for integration.
+6. Report
+   - Document results and update `documentation/` with photos, measurements, and any design changes. If issues are found, open an issue in the repo with steps to reproduce and suggested fixes.
 
-## Learning Source
+## Important notes
+(Please paste any additional important notes you added here; you can paste them in a follow-up message and I'll insert them verbatim.)
+- [PLACEHOLDER — paste your "important notes" text here]
 
-This project was completed while following the **PCB Design Zero-to-Hero** training modules by NU Teams.
+## Contributing
+Contributions welcome — open issues or PRs. For larger changes:
+- Create a branch: `feature/xxx` or `fix/xxx`
+- Update documentation and BOM
+- Add verification notes and updated PDFs
 
-The training material provided the learning framework for the project, while this repository contains my KiCad project files, PCB layout, documentation, verification results, and generated fabrication outputs.
+If you'd like, I can add a `CONTRIBUTING.md` file and basic issue/PR templates.
 
-
----
+## Changelog
+- v0.1 — Initial PCB design and documentation (KiCad 10.0). (Add future entries here as you iterate.)
 
 ## License
-
 Copyright © 2026 Shlok Chorge
 
-This project is licensed under the **CERN Open Hardware Licence Version 2 – Strongly Reciprocal (CERN-OHL-S-2.0)**.
-
-This license allows others to:
-
-- Use and study the hardware design
-- Modify and adapt the design
-- Manufacture hardware based on the design
-- Distribute the original or modified design
-
-Under the Strongly Reciprocal terms, modifications and derivative designs based on this project must be made available under the same license, along with the corresponding source design files.
-
-See [`LICENSE`](LICENSE) for the complete license text.
-
----
+This project is licensed under the CERN Open Hardware Licence Version 2 – Strongly Reciprocal (CERN‑OHL‑S‑2.0). See `LICENSE` for full text.
 
 ## Author
-
-**Shlok Chorge** **.** [GitHub Profile](https://github.com/shlok-ac)
+Shlok Chorge — https://github.com/shlok-ac
