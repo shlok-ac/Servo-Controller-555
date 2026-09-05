@@ -8,7 +8,7 @@ A 555 timer based servo controller designed in KiCad as part of my PCB design le
 
 [![License: CERN-OHL-S-2.0](https://img.shields.io/badge/License-CERN--OHL--S--2.0-blue.svg)](LICENSE)
 [![KiCad 10.0](https://img.shields.io/badge/KiCad-10.0-brightgreen.svg)](https://kicad.org)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717.svg)](https://github.com/shlok-ac/Servo-Controller-555)[![repo size](https://img.shields.io/github/repo-size/shlok-ac/Servo-Controller-555)](https://github.com/shlok-ac/Servo-Controller-555) [![issues](https://img.shields.io/github/issues/shlok-ac/Servo-Controller-555)](https://github.com/shlok-ac/Servo-Controller-555/issues)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717.svg)](https://github.com/shlok-ac/Servo-Controller-555) [![repo size](https://img.shields.io/github/repo-size/shlok-ac/Servo-Controller-555)](https://github.com/shlok-ac/Servo-Controller-555) [![issues](https://img.shields.io/github/issues/shlok-ac/Servo-Controller-555)](https://github.com/shlok-ac/Servo-Controller-555/issues)
 
 ## TL;DR
 
